@@ -5,10 +5,10 @@ export default function Calculator ({
     toggleTheme,
     isDark,
     children,
-    ...props
+    props
 }) {
     return (
-        <View {...props} >
+        <View { ...props } >
             { children }
         </View>
     )
