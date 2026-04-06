@@ -1,14 +1,20 @@
 import { View } from "react-native";
+import { getStyle } from './style';
 
 
-export default function Calculator ({
-    toggleTheme,
-    isDark,
+export default function Calculator({
+    style,
     children,
-    props
+    ...props
 }) {
+
+    const styles = getStyle();
+
     return (
-        <View { ...props } >
+        <View 
+            style={[styles.view, style]} 
+            { ...props }
+        >
             { children }
         </View>
     )
