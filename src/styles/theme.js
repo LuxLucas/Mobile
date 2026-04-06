@@ -13,7 +13,7 @@ function applyFonts (baseTheme, fontsLoaded) {
     fonts: fontsLoaded 
         ? {
             ...baseTheme.fonts,
-            bodyLarge: { fontFamily: 'Poppins_400Regular' },
+            bodyLarge: { fontFamily: 'Poppins_600SemiBold' },
             headlineLarge: { fontFamily: 'Poppins_700Bold' },
         }
         : baseTheme.fonts,
@@ -28,8 +28,7 @@ export function getLightTheme (fontsLoaded) {
       ...constants,
       background: '#FAFAFA',
       surface: '#F0EFEF',
-      onBackground: '#010101',
-      onSurface: '#010101',
+      text: '#010101', 
     }
   };
 
@@ -44,8 +43,7 @@ export function getDarkTheme (fontsLoaded) {
       ...constants,
       background: '#6F9395',
       surface: '#3D6063',
-      onBackground: '#FAFAFA',
-      onSurface: '#FAFAFA',
+      text: '#FAFAFA',
     }
   };
 
