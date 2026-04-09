@@ -4,11 +4,11 @@ import { useFontsContext } from "../../../contexts/FontContext";
 import { useTheme } from "react-native-paper";
 
 
-export default function Words({
+const Words = ({
     children, 
     style, 
     ...props
-}) {
+}) => {
 
     const theme = useTheme();
     const { fontsLoaded } = useFontsContext(); 
@@ -20,3 +20,5 @@ export default function Words({
         </Text>
     )
 }
+
+export { Words as Text }
