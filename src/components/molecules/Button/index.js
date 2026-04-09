@@ -1,13 +1,14 @@
 import { TouchableOpacity } from "react-native";
 import { useTheme } from "react-native-paper";
 import { getStyles } from "./style";
+import { Text } from "../../atoms/Words";
 
 
 export default function Button({
     style,
     variant = 'primary',
     activeOpacity = .8,
-    children,
+    title,
     ...props
 }){
 
@@ -17,10 +18,13 @@ export default function Button({
     return (
         <TouchableOpacity 
             style={[styles.button, style]}
-            activeOpacity={activeOpacity} 
+            activeOpacity={activeOpacity}
+            title
             {...props}
         >
-            {children}
+            <Text style={styles.text}> 
+                {title} 
+            </Text>
         </TouchableOpacity>
     )
 }
