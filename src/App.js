@@ -1,6 +1,4 @@
-import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { useState } from "react";
 import Calculator from "./pages/Calculator";
 
 import {  
@@ -10,18 +8,11 @@ import {
   Poppins_700Bold 
 } from '@expo-google-fonts/poppins';
 
-import { 
-  getDarkTheme, 
-  getLightTheme 
-} from './styles/theme';
-
 import { FontsProvider } from "./contexts/FontContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 
 export default function App() {
-
-  const [isDark, setIsDark] = useState(false);
-  const toggleTheme = () => setIsDark(prev => !prev);
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -29,16 +20,13 @@ export default function App() {
     Poppins_700Bold,
   });
 
-  const theme = isDark
-    ? getDarkTheme(fontsLoaded)
-    : getLightTheme(fontsLoaded);
 
   return (
     <SafeAreaProvider>
       <FontsProvider fontsLoaded={fontsLoaded}>
-        <PaperProvider theme={theme}>
-          <Calculator/>        
-        </PaperProvider>
+        <ThemeProvider>
+          <Calculator/>
+        </ThemeProvider>
       </FontsProvider>
     </SafeAreaProvider>
   );
