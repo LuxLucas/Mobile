@@ -2,9 +2,7 @@ import { MD3DarkTheme, MD3LightTheme } from "react-native-paper";
 
 
 const constants = {
-  primary: '#3C6E71',
-  secondary: '#353535',
-  tertiary: '#FAFAFA',
+  primary: '#4b5dfcff',
 };
 
 function applyFonts (baseTheme, fontsLoaded) {
@@ -26,8 +24,9 @@ export function getLightTheme (fontsLoaded) {
     colors: {
       ...MD3LightTheme.colors,
       ...constants,
-      background: '#FAFAFA',
-      surface: '#F0EFEF',
+      secondary: '#D2D3DA',
+      tertiary: '#FAFAFA',
+      background: '#F1F2F3',
       text: '#010101', 
     }
   };
@@ -41,8 +40,9 @@ export function getDarkTheme (fontsLoaded) {
     colors: {
       ...MD3DarkTheme.colors,
       ...constants,
-      background: '#6F9395',
-      surface: '#3D6063',
+      secondary: '#4E505F',
+      tertiary: '#2E2F38',
+      background: '#17171C',
       text: '#FAFAFA',
     }
   };
