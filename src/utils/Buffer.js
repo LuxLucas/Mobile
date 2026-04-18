@@ -2,6 +2,10 @@ export default class Buffer{
 
     #validDigits;
     #value;
+
+    clearBuffer(){
+        this.#value = '0';
+    }
     
     constructor(){
         this.#validDigits = [
@@ -17,32 +21,33 @@ export default class Buffer{
             '9', 
             '.'
         ];
-        this.#value = '0';
+        this.clearBuffer();
     }
 
-    clearBuffer(){
-        this.#value = '0';
+    #lastDigit(){
+        return this.#value.slice(-1);
     }
 
     getValue(){
+        if(this.#lastDigit() === '.') this.setValue('0');
         return this.#value;
-    }
-
-    #ifDigitIsValidThen(digit){
-        if(this.#value === '0' && digit !== '.'){
-            this.#value = digit
-            return
-        } 
-        this.#value += digit
     }
 
     #digitIsValid(digit){
         return digit in this.#validDigits;
     }
 
+    #ifDigitIsValidThen(digit){
+        if(this.#value === '0' && digit !== '.'){
+            this.#value = digit;
+            return
+        } 
+        this.#value += digit;
+    }
+
     setValue(digit){
         if(this.#digitIsValid(digit)){
-            this.#ifDigitIsValidThen(digit)
+            this.#ifDigitIsValidThen(digit);
         }
     }
 
