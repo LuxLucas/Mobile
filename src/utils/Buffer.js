@@ -19,20 +19,27 @@ export default class Buffer{
         return this.#value;
     }
 
+    #ifDigitIsValidThen(digit){
+        if(this.#value === '0'){
+            this.#value = digit
+            return
+        } 
+        this.#value += digit
+    }
+
     #digitIsValid(digit){
         return digit in this.#validDigits;
     }
 
-    addDigit(digit){
-
-        if(this.#value === '0' && digit === '0') return;
-
-        if(this.#value === '0' && this.#digitIsValid(digit)){
-            this.#value = digit;
-        }else if(this.#digitIsValid(digit)){
-            this.#value += digit;
+    setValue(digit){
+        if(this.#digitIsValid(digit)){
+            this.#ifDigitIsValidThen(digit)
         }
+    }
 
+    addDigit(digit){
+        if(this.#value === '0' && digit === '0') return;
+        this.setValue(digit)
     }
 
     addPoint(){
