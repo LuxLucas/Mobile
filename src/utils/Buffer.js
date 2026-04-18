@@ -1,10 +1,6 @@
 export default class Buffer {
     
-    #value;
-
-    constructor() {
-        this.clearBuffer();
-    }
+    #value = '0';
 
     clearBuffer() {
         this.#value = '0';
@@ -17,7 +13,7 @@ export default class Buffer {
     }
 
     addDigit(digit) {
-        if (!/[0-9]/.test(digit)) return;
+        if (!/^\d$/.test(digit)) return;
 
         if (this.#value === '0') {
             this.#value = digit;
@@ -31,5 +27,5 @@ export default class Buffer {
             this.#value += '.';
         }
     }
-    
+
 }
