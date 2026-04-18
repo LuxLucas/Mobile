@@ -1,17 +1,26 @@
 export default class Buffer{
 
     #validDigits;
-    #hasPoint;
     #value;
     
     constructor(){
-        this.#validDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        this.#hasPoint = false;
+        this.#validDigits = [
+            '0', 
+            '1', 
+            '2', 
+            '3', 
+            '4', 
+            '5', 
+            '6', 
+            '7', 
+            '8', 
+            '9', 
+            '.'
+        ];
         this.#value = '0';
     }
 
     clearBuffer(){
-        this.#hasPoint = false;
         this.#value = '0';
     }
 
@@ -20,7 +29,7 @@ export default class Buffer{
     }
 
     #ifDigitIsValidThen(digit){
-        if(this.#value === '0'){
+        if(this.#value === '0' && digit !== '.'){
             this.#value = digit
             return
         } 
@@ -39,14 +48,15 @@ export default class Buffer{
 
     addDigit(digit){
         if(this.#value === '0' && digit === '0') return;
-        this.setValue(digit)
+        this.setValue(digit);
+    }
+
+    #hasPoint(){
+        return this.#value.includes('.');
     }
 
     addPoint(){
-        if (!this.#hasPoint) {
-            this.#value += '.';
-            this.#hasPoint = true;
-        }
+        if (!this.#hasPoint()) this.setValue('.');
     }
 
 }
