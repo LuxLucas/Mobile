@@ -1,60 +1,40 @@
-export default class Formulator{
+export default class Formulator {
 
-    #formula;
-    #openParentheses;
-    #validOperators;
+    #formula = [];
+    #operators = ['+', '-', '*', '/'];
 
-    constructor(){
-        this.#formula = '';
-        this.#openParentheses = 0;
-        this.#validOperators = ['+', '-', '*', '/'];
+    #last() {
+        return this.#formula.at(-1);
     }
 
-    #operatorIsValid(operator){
-        return this.#validOperators.includes(operator);
+    #isOperator(value) {
+        return this.#operators.includes(value);
     }
 
-    #getLast(){
-        return this.#formula.slice(-1);
+    #isNumber(value) {
+        return !isNaN(value);
     }
 
-    #lastIsOperator(){
-        return this.#validOperators.includes(this.#getLast());
-    }
+    addOperator(op) {
+        if (!this.#isOperator(op)) return;
 
-    #lastIsOpenParenthesis(){
-        return this.#getLast() === '(';
-    }
+        const last = this.#last();
 
-    addOperator(operator){
-
-        if(this.#formula === ''){
-
-            if(['+', '-'].includes(operator)){
-                this.#formula = operator;
+        if (!last) {
+            if (op === '+' || op === '-') {
+                this.#formula.push(op);
             }
-
             return;
-        } 
-
-        if(this.#operatorIsValid(operator)){
-
-            if(this.#lastIsOpenParenthesis()){
-                if (['+', '-'].includes(operator)) this.#formula += operator;
-                return;
-            }
-
-            if(this.#lastIsOperator){
-                const beforeLast = this.#formula.slice(-2, -1);
-                if (beforeLast === '(') return; 
-                this.#formula = this.#formula.slice(0, -1) + operator;
-            }else{
-                this.#formula += operator;
-            }
-
         }
-        
 
+        if (this.#isOperator(last)) {
+            this.#formula[this.#formula.length - 1] = op;
+            return;
+        }
+
+        if (this.#isNumber(last) || last === ')') {
+            this.#formula.push(op);
+        }
     }
 
 }
