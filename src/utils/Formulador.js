@@ -13,10 +13,6 @@ export default class Formulator {
         return this.#formula.at(-1);
     }
 
-    #valueAt(index){
-        return this.#formula.at(index);
-    }
-
     #isOperator(value) {
         return this.#operators.includes(value);
     }
@@ -29,7 +25,7 @@ export default class Formulator {
         if (!this.#isOperator(op)) return;
 
         const last = this.#last();
-        const penultimate = this.#valueAt(-2);
+        const penultimate = this.#formula.at(-2);
 
         if (!last) {
             if (op === '+' || op === '-') { 
@@ -73,6 +69,40 @@ export default class Formulator {
             this.#formula.push(')');
             this.#openParentheses--;
         }
+    }
+
+    addNumber(number){
+        if(!this.#isNumber(number)) return;
+
+        const last = this.#last();
+
+        if(this.#isNumber(last)) return;
+        if(last === ')') this.addOperator('*');
+
+        this.#formula.push(number);
+    }
+
+    #closeAllOpenParentheses(){
+        let before = this.#openParentheses;
+
+        while (this.#openParentheses > 0){
+            before = this.#openParentheses
+            this.closeParentheses();
+            if(before === this.#openParentheses) break;
+        }
+    }
+
+    #finalize(){
+        while(this.#isOperator(this.#last())){
+            this.#formula.pop();
+        }
+
+        this.#closeAllOpenParentheses();
+    }
+
+    getFormula(){
+        this.#finalize();
+        return this.#formula.join('');
     }
 
 }
