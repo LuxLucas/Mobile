@@ -48,6 +48,33 @@ export default class Formulator {
         }
     }
 
+    canAddOperator(op){
+        if (!this.#isOperator(op)) return false;
+
+        const last = this.#last();
+        const penultimate = this.#formula.at(-2);
+
+        if (!last){
+            return op === '+' || op === '-';
+        } 
+
+        if (this.#isOperator(last)) {
+            const isUnary = op === '+' || op === '-';
+
+            if (penultimate === '(') {
+                return isUnary;
+            }
+
+            return true;
+        }
+
+        if (this.#isNumber(last) || last === ')') {
+            return true;
+        }
+
+        return false;
+    }
+
     openParentheses(){
         const last = this.#last();
 
