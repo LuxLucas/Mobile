@@ -2,7 +2,7 @@ export default class Buffer {
     
     #value = '0';
 
-    clearBuffer() {
+    clear() {
         this.#value = '0';
     }
 
