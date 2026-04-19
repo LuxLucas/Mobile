@@ -6,6 +6,10 @@ export default class Buffer {
         this.#value = '0';
     }
 
+    hasValue(){
+        return this.#value !== '0';
+    }
+
     getValue() {
         return this.#value.endsWith('.') 
             ? this.#value.slice(0, -1) 
@@ -27,5 +31,4 @@ export default class Buffer {
             this.#value += '.';
         }
     }
-
 }
